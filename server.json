@@ -23,6 +23,22 @@
       "category": "Compra",
       "price": 450,
       "createdAt": "2022-08-10"
+    },
+    {
+      "category": "Muse",
+      "type": "income",
+      "description": "they will not force us",
+      "price": 2323,
+      "createdAt": "2022-09-09T20:50:00.791Z",
+      "id": 4
+    },
+    {
+      "category": "Muse",
+      "type": "income",
+      "description": "they will not force us",
+      "price": 2323,
+      "createdAt": "2022-09-09T20:50:01.390Z",
+      "id": 5
     }
   ]
 }

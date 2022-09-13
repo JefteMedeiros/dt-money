@@ -3,8 +3,9 @@ import { useForm } from "react-hook-form";
 import { SearchFormContainer } from "./styles";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useContext } from "react";
+import { useContextSelector } from "use-context-selector";
 import { TransactionsContext } from "../../../../context/TransactionsContext";
+import { memo } from "react";
 
 const searchFormSchema = z.object({
   query: z.string(),
@@ -12,8 +13,19 @@ const searchFormSchema = z.object({
 
 type SearchFormInputs = z.infer<typeof searchFormSchema>;
 
-export function SearchForm() {
-  const { fetchTransactions } = useContext(TransactionsContext);
+// - Fluxo de renderização do react
+// 1 - O HTML é recriado
+// 2 - A versão do HTML antiga é comparada com a nova
+// 3 - Se houverem mudanças, o HTML é reescrito 
+
+// - Fluxo de renderização com memo
+// 0 - Hooks changed, props changed (deep comparsion)
+// 0.1 - Comparar a versão anterior dos hooks e props
+// 0.2 - Caso algum tenha mudado, permitir a nova renderização.
+
+
+const searchForm = () => {
+  const fetchTransactions = useContextSelector(TransactionsContext, (context) => { return context.fetchTransactions });
 
   const {
     register,
@@ -42,3 +54,5 @@ export function SearchForm() {
     </SearchFormContainer>
   );
 }
+
+export const SearchForm = memo(searchForm);
